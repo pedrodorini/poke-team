@@ -19,6 +19,10 @@ export const LandingContainer = styled.div`
     padding: 15px;
     overflow-y: auto;
     background: ${Colors.Secondary};
+
+    @media (min-width: 1300px) {
+      width: 50%;
+    }
   }
 
   .logo-container {
