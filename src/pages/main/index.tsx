@@ -9,6 +9,7 @@ import Logo from 'icons/logo';
 import PokemonCard from 'components/PokemonCard';
 
 import { LandingContainer } from './styles';
+import Pokeball from 'icons/pokeball';
 
 function PokemonLanding() {
   const [pokemons, setPokemons] = useState<Pokemon[]>();
@@ -31,13 +32,29 @@ function PokemonLanding() {
       <div className="table">
         {pokemons?.map?.((pokemon, index) => {
           return (
-            <PokemonCard
-              key={pokemon.url}
-              name={pokemon.name}
-              index={index}
-            ></PokemonCard>
+            <PokemonCard key={pokemon.url} name={pokemon.name} index={index} />
           );
         })}
+      </div>
+      <div className="poke-slots-container">
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
+        <div className="poke-slot">
+          <Pokeball width={80} height={80} />
+        </div>
       </div>
     </LandingContainer>
   );

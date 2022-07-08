@@ -20,13 +20,13 @@ const Pokeball: React.FC<IconProps> = ({ width = 399, height = 399 }) => (
       fill="white"
       stroke="black"
     />
-    <circle cx="199.5" cy="199.5" r="189" stroke="black" stroke-width="21" />
-    <line x1="18" y1="201" x2="378" y2="201" stroke="black" stroke-width="28" />
+    <circle cx="199.5" cy="199.5" r="189" stroke="black" strokeWidth="21" />
+    <line x1="18" y1="201" x2="380" y2="201" stroke="black" strokeWidth="28" />
     <path
       d="M263.5 199C263.5 234.689 234.78 263.5 199.5 263.5C164.22 263.5 135.5 234.689 135.5 199C135.5 163.311 164.22 134.5 199.5 134.5C234.78 134.5 263.5 163.311 263.5 199Z"
       fill="white"
       stroke="black"
-      stroke-width="21"
+      strokeWidth="21"
     />
     <circle cx="200" cy="199" r="27" fill="black" />
   </svg>

@@ -7,7 +7,8 @@ export const Card = styled.div`
   font-size: 16px;
   font-weight: bold;
   border-radius: 4px;
-  width: 100%;
+  flex: 1;
+  min-width: 245px;
   background-color: ${Colors.Secondary};
   box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
   color: ${Colors.PrimaryText};
@@ -23,5 +24,6 @@ export const Card = styled.div`
 
   :not(:last-child) {
     margin-bottom: 10px;
+    margin-right: 10px;
   }
 `;

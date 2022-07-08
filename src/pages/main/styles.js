@@ -10,24 +10,47 @@ export const LandingContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-direction: column;
 
   .table {
     width: 80%;
-    height: 70%;
+    height: 60%;
     border: 1px solid black;
     border-radius: 3px;
     padding: 15px;
     overflow-y: auto;
     background: ${Colors.Secondary};
-
-    @media (min-width: 1300px) {
-      width: 50%;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    alig-content: space-around;
   }
 
   .logo-container {
     position: absolute;
     top: 35px;
     left: 45px;
+  }
+
+  .poke-slots-container {
+    display: flex;
+    padding: 15px;
+  }
+
+  .poke-slot {
+    border-radius: 6px;
+    border: 1px solid black;
+    width: 100px;
+    height: 150px;
+    background-color: #f4f4f4;
+    position: relative;
+    padding: 35px 10px;
+
+    :not(:last-child) {
+      margin-right: 10px;
+    }
+
+    svg {
+      opacity: 0.5;
+    }
   }
 `;
