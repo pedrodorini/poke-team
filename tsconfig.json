@@ -6,6 +6,7 @@
       "services/*": ["services/*"],
       "constants/*": ["constants/*"],
       "utilities/*": ["utilities/*"],
+      "components/*": ["components/*"],
       "icons/*": ["icons/*"]
     },
     "target": "es5",

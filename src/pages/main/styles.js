@@ -17,7 +17,7 @@ export const LandingContainer = styled.div`
     height: 60%;
     border: 1px solid black;
     border-radius: 3px;
-    padding: 15px;
+    padding: 15px 0 0 15px;
     overflow-y: auto;
     background: ${Colors.Secondary};
     display: flex;

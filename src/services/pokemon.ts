@@ -1,13 +1,10 @@
 import Axios from 'utilities/request';
 
-import { Pokemon } from 'types/pokemon';
-
-interface GetPokemonsResponseData {
-  count: number;
-  next?: string;
-  previous?: string;
-  results: Pokemon[];
-}
+import {
+  PokemonDetails,
+  GetPokemonsResponseData,
+  Pokemon,
+} from 'types/pokemon';
 
 export async function getPokemons() {
   let results: Pokemon[] = [];
@@ -24,5 +21,20 @@ export async function getPokemons() {
     console.error(error);
   }
 
+  return results;
+}
+
+export async function getPokemonByName(name: string) {
+  let results = null;
+
+  try {
+    const response = await Axios.get<PokemonDetails>(`pokemon/${name}`);
+
+    if (response?.status === 200 && response?.data) {
+      results = response.data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
   return results;
 }
