@@ -9,7 +9,7 @@ import Logo from 'icons/logo';
 import PokemonCard from 'components/PokemonCard';
 
 import { LandingContainer } from './styles';
-import Pokeball from 'icons/pokeball';
+import PokemonSlots from 'components/PokemonSlots';
 
 function PokemonLanding() {
   const [pokemons, setPokemons] = useState<Pokemon[]>();
@@ -36,26 +36,7 @@ function PokemonLanding() {
           );
         })}
       </div>
-      <div className="poke-slots-container">
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-        <div className="poke-slot">
-          <Pokeball width={80} height={80} />
-        </div>
-      </div>
+      <PokemonSlots />
     </LandingContainer>
   );
 }

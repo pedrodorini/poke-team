@@ -12,8 +12,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, index }) => {
       }.svg`,
     [index]
   );
+
   return (
-    <Card>
+    <Card
+      draggable
+      onDragStart={(e: React.DragEvent) => {
+        e.dataTransfer.setData('text/plain', String(index + 1));
+      }}
+    >
       <img src={getCardImage()} alt={name} />
       <p>{name}</p>
     </Card>

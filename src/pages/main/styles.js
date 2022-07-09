@@ -22,7 +22,6 @@ export const LandingContainer = styled.div`
     background: ${Colors.Secondary};
     display: flex;
     flex-wrap: wrap;
-    alig-content: space-around;
   }
 
   .logo-container {
@@ -51,6 +50,14 @@ export const LandingContainer = styled.div`
 
     svg {
       opacity: 0.5;
+    }
+
+    img {
+      position: absolute;
+      top: 35px;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
     }
   }
 `;
