@@ -30,7 +30,7 @@ const getHowManyCardsFit = (tableWidth = 0) => {
   for (let i = 1; i <= 50; i++) {
     const possibility = (tableWidth - 30) / i;
 
-    if (possibility >= 185) {
+    if (possibility >= 187) {
       elementSize = possibility;
       columnCount = i;
     } else {
@@ -116,9 +116,9 @@ function PokemonLanding() {
                       return (
                         <PokemonCard
                           key={actualIndex}
-                          startX={virtualColumn.start}
+                          startX={virtualColumn.index * fit.elementSize}
                           startY={virtualRow.start}
-                          width={100 / fit?.columnCount}
+                          width={fit.elementSize}
                           name={pokemon.name}
                           index={actualIndex}
                         />

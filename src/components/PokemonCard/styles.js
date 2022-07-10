@@ -11,8 +11,8 @@ export const Card = styled.div.attrs(({ startX, startY }) => ({
   font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
-  width: calc(${({ width }) => width}% - 10px);
-  min-width: 175px;
+  width: ${({ width }) => width - 10}px;
+  min-width: 177px;
   background-color: ${Colors.Secondary};
   box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
   color: ${Colors.PrimaryText};
