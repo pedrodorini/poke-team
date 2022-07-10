@@ -6,6 +6,9 @@ export interface Pokemon {
 export type PokemonCardProps = {
   name: string;
   index: number;
+  startX: number;
+  startY: number;
+  width: number;
 };
 
 export type IconProps = {

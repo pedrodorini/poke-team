@@ -14,7 +14,7 @@ const modalRoot = document.getElementById('modal-root') as HTMLElement;
 const Modal = ({ onClose, children, visible }: ModalProps) => {
   if (visible)
     return ReactDOM.createPortal(
-      <Panel>
+      <Panel onClick={onClose}>
         <div className="modal-body">
           <div className="close-container">
             <button onClick={onClose}>Close</button>

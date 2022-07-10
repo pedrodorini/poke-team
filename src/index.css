@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
 button:active {
   transform: translateY(2px);
 }

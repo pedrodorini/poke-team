@@ -11,7 +11,7 @@ export async function getPokemons() {
 
   try {
     const response = await Axios.get<GetPokemonsResponseData>(
-      'pokemon?limit=100&offset=0'
+      'pokemon?limit=1000&offset=0'
     );
 
     if (response?.status === 200 && response?.data) {

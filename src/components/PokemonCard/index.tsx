@@ -8,7 +8,13 @@ import Modal from 'components/Modal';
 
 import { Card } from './styles';
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ name, index }) => {
+const PokemonCard: React.FC<PokemonCardProps> = ({
+  name,
+  index,
+  width,
+  startX,
+  startY,
+}) => {
   const [details, setDetails] = useState<PokemonDetails | null>(null);
 
   const loadPokemonInfo = useCallback(async () => {
@@ -27,6 +33,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, index }) => {
   return (
     <>
       <Card
+        width={width}
+        startX={startX}
+        startY={startY}
         draggable
         onDragStart={(e: React.DragEvent) => {
           e.dataTransfer.setData('text/plain', String(index + 1));

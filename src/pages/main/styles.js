@@ -20,8 +20,6 @@ export const LandingContainer = styled.div`
     padding: 15px 0 0 15px;
     overflow-y: auto;
     background: ${Colors.Secondary};
-    display: flex;
-    flex-wrap: wrap;
   }
 
   .logo-container {
@@ -60,4 +58,14 @@ export const LandingContainer = styled.div`
       height: 80px;
     }
   }
+`;
+
+export const CardWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  height: ${({ height }) => height}px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
 `;
