@@ -26,6 +26,7 @@ export const LandingContainer = styled.div`
     position: absolute;
     top: 35px;
     left: 45px;
+    z-index: 1;
   }
 
   .poke-slots-container {

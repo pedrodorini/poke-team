@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { getPokemonByName } from 'services/pokemon';
 
@@ -16,18 +16,23 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   startY,
 }) => {
   const [details, setDetails] = useState<PokemonDetails | null>(null);
+  const [modal, setModal] = useState(false);
 
   const loadPokemonInfo = useCallback(async () => {
     const response = await getPokemonByName(name);
     setDetails(response);
   }, [name]);
 
+  useEffect(() => {
+    loadPokemonInfo();
+  }, [loadPokemonInfo]);
+
   const getCardImage = useCallback(
     () =>
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-        index + 1
-      }.svg`,
-    [index]
+      details?.sprites?.other?.dream_world?.front_default ||
+      details?.sprites?.other?.official_artwork?.front_default ||
+      details?.sprites?.front_default,
+    [details]
   );
 
   return (
@@ -40,12 +45,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         onDragStart={(e: React.DragEvent) => {
           e.dataTransfer.setData('text/plain', String(index + 1));
         }}
-        onClick={loadPokemonInfo}
+        onClick={() => setModal(true)}
       >
         <img src={getCardImage()} alt={name} />
         <p>{name}</p>
       </Card>
-      <Modal onClose={() => setDetails(null)} visible={!!details}>
+      <Modal onClose={() => setModal(false)} visible={modal}>
         {JSON.stringify(details)}
       </Modal>
     </>

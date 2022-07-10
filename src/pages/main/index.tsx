@@ -4,7 +4,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import PokemonCard from 'components/PokemonCard';
 import PokemonSlots from 'components/PokemonSlots';
 
-import { Pokemon } from 'types/pokemon';
+import { Fit, Pokemon } from 'types/pokemon';
 
 import { getPokemons } from 'services/pokemon';
 
@@ -23,55 +23,76 @@ interface VirtualItem<TItemElement = unknown> {
   measureElement: (el: TItemElement | null) => void;
 }
 
-const getHowManyCardsFit = (tableWidth: number) => {
-  let maxOption = 1;
-  let lastPossibility = 0;
+const getHowManyCardsFit = (tableWidth = 0) => {
+  let columnCount = 1;
+  let elementSize = 0;
 
   for (let i = 1; i <= 50; i++) {
     const possibility = (tableWidth - 30) / i;
 
     if (possibility >= 185) {
-      maxOption = i;
+      elementSize = possibility;
+      columnCount = i;
     } else {
       break;
     }
-    lastPossibility = possibility;
   }
 
-  return { maxOption, lastPossibility };
+  return { columnCount, elementSize };
 };
 
 function PokemonLanding() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>();
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [guide, setGuide] = useState<number[][]>([]);
   const tableRef = useRef<HTMLDivElement>(null);
-  const fit = useRef<{ maxOption: number; lastPossibility: number }>();
+  const [fit, setFit] = useState<Fit>({ columnCount: 0, elementSize: 0 });
+
+  const getFit = useCallback(
+    () => getHowManyCardsFit(tableRef.current?.offsetWidth),
+    []
+  );
 
   const loadPokemons = useCallback(async () => {
     const results = await getPokemons();
-    fit.current = getHowManyCardsFit(tableRef.current?.offsetWidth || 1);
-
+    const currentFit = getFit();
+    setFit(currentFit);
     setGuide(
-      toMatrix(Array.from(Array(results.length).keys()), fit.current.maxOption)
+      toMatrix(Array.from(Array(results.length).keys()), currentFit.columnCount)
     );
     setPokemons(results);
-  }, []);
+  }, [getFit]);
 
   useEffect(() => {
     loadPokemons();
   }, [loadPokemons]);
 
+  useEffect(() => {
+    const updateFit = () => {
+      setFit(getFit());
+    };
+
+    window.addEventListener('resize', updateFit);
+
+    return () => window.removeEventListener('resize', updateFit);
+  }, [getFit]);
+
+  useEffect(() => {
+    setGuide(
+      toMatrix(Array.from(Array(pokemons?.length).keys()), fit.columnCount)
+    );
+  }, [fit.columnCount, pokemons?.length]);
+
   const rowVirtualizer = useVirtualizer({
-    count: pokemons?.length || 1 / 4,
+    count: Math.ceil(pokemons?.length / fit?.columnCount),
     getScrollElement: () => tableRef.current,
     estimateSize: useCallback(() => 170, []),
   });
 
   const columnVirtualizer = useVirtualizer({
     horizontal: true,
-    count: fit.current?.maxOption,
+    count: fit?.columnCount,
     getScrollElement: () => tableRef.current,
-    estimateSize: useCallback(() => fit.current?.lastPossibility, []),
+    estimateSize: () => fit?.elementSize,
   });
 
   return (
@@ -82,25 +103,28 @@ function PokemonLanding() {
       <div className="table" ref={tableRef}>
         <CardWrapper height={rowVirtualizer.getTotalSize()}>
           {pokemons &&
-            rowVirtualizer.getVirtualItems().map((virtualItem: VirtualItem) => (
-              <React.Fragment key={virtualItem.key}>
+            rowVirtualizer.getVirtualItems().map((virtualRow: VirtualItem) => (
+              <React.Fragment key={virtualRow.key}>
                 {columnVirtualizer
                   .getVirtualItems()
-                  .map((columnItem: VirtualItem) => {
+                  .map((virtualColumn: VirtualItem) => {
                     const actualIndex =
-                      guide[virtualItem.index]?.[columnItem.index];
+                      guide[virtualRow.index][virtualColumn.index];
                     const pokemon = pokemons[actualIndex];
 
-                    return (
-                      <PokemonCard
-                        key={actualIndex}
-                        startX={columnItem.start}
-                        startY={virtualItem.start}
-                        width={columnItem.size - 15}
-                        name={pokemon.name}
-                        index={actualIndex}
-                      />
-                    );
+                    if (actualIndex >= 0) {
+                      return (
+                        <PokemonCard
+                          key={actualIndex}
+                          startX={virtualColumn.start}
+                          startY={virtualRow.start}
+                          width={100 / fit?.columnCount}
+                          name={pokemon.name}
+                          index={actualIndex}
+                        />
+                      );
+                    }
+                    return <></>;
                   })}
               </React.Fragment>
             ))}

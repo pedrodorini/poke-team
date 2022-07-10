@@ -2,12 +2,16 @@ import styled from 'styled-components';
 
 import { Colors } from 'constants/colors';
 
-export const Card = styled.div`
+export const Card = styled.div.attrs(({ startX, startY }) => ({
+  style: {
+    transform: `translate(${startX}px, ${startY}px)`,
+  },
+}))`
   padding: 20px;
   font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
-  width: ${({ width }) => width}px;
+  width: calc(${({ width }) => width}% - 10px);
   min-width: 175px;
   background-color: ${Colors.Secondary};
   box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.3);
@@ -20,10 +24,8 @@ export const Card = styled.div`
   margin-bottom: 10px;
   margin-right: 10px;
   position: absolute;
-  top: 0;
-  left: 0;
   height: 160px;
-  transform: translate(${({ startX, startY }) => `${startX}px, ${startY}px`});
+  white-space: nowrap;
 
   img {
     width: 100px;

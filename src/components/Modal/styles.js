@@ -10,17 +10,24 @@ export const Panel = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .modal-body {
     width: 70%;
     margin: auto;
-    margin-top: 10vh;
     padding: 20px;
     border-radius: 4px;
     background-color: ${Colors.Secondary};
     box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.4);
     position: relative;
     z-index: 3;
+
+    .modal-content {
+      max-height: 85vh;
+      overflow: auto;
+    }
 
     .close-container {
       width: 100%;

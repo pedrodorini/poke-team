@@ -72,6 +72,14 @@ export interface Sprite {
   back_shiny: string;
   back_female: string;
   back_shiny_female: string;
+  other?: {
+    dream_world?: {
+      front_default?: string;
+    };
+    official_artwork?: {
+      front_default?: string;
+    };
+  };
 }
 
 export interface Stat {
@@ -101,3 +109,8 @@ export interface PokemonDetails {
   stats: Stat[];
   types: Type[];
 }
+
+export type Fit = {
+  columnCount: number;
+  elementSize: number;
+};

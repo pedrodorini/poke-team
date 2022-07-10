@@ -15,11 +15,11 @@ const Modal = ({ onClose, children, visible }: ModalProps) => {
   if (visible)
     return ReactDOM.createPortal(
       <Panel onClick={onClose}>
-        <div className="modal-body">
+        <div className="modal-body" onClick={(e) => e.stopPropagation()}>
           <div className="close-container">
             <button onClick={onClose}>Close</button>
           </div>
-          {children}
+          <div className="modal-content">{children}</div>
         </div>
       </Panel>,
       modalRoot
