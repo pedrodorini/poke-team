@@ -80,7 +80,7 @@ function PokemonLanding() {
     setGuide(
       toMatrix(Array.from(Array(pokemons?.length).keys()), fit.columnCount)
     );
-  }, [fit.columnCount, pokemons?.length]);
+  }, [fit.columnCount, pokemons.length]);
 
   const rowVirtualizer = useVirtualizer({
     count: Math.ceil(pokemons?.length / fit?.columnCount),
@@ -124,6 +124,7 @@ function PokemonLanding() {
                         />
                       );
                     }
+
                     return <></>;
                   })}
               </React.Fragment>
