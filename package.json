@@ -22,7 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -30,6 +31,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "jest": {
+    "resetMocks": false
   },
   "browserslist": {
     "production": [

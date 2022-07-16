@@ -13,13 +13,13 @@ const PokemonSlot: React.FC<SlotProps> = ({ addPokemon, removePokemon }) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>('');
   const [hovering, setHovering] = useState<boolean>(false);
 
-  const removeFromSlot = useCallback(() => {
-    setPokemonIndex((prev) => {
-      removePokemon(prev);
-
-      return '';
-    });
-  }, [removePokemon]);
+  const removeFromSlot = useCallback(
+    (index: string) => {
+      removePokemon(index);
+      setPokemonIndex('');
+    },
+    [removePokemon]
+  );
 
   const getPokemon: () => string = useCallback(() => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonIndex}.svg`;
@@ -36,6 +36,7 @@ const PokemonSlot: React.FC<SlotProps> = ({ addPokemon, removePokemon }) => {
   return (
     <div
       className="poke-slot"
+      data-testid="poke-slot"
       onMouseEnter={() => setHovering(!!pokemonIndex)}
       onMouseLeave={() => setHovering(false)}
       onDragOver={(e) => {
@@ -43,9 +44,11 @@ const PokemonSlot: React.FC<SlotProps> = ({ addPokemon, removePokemon }) => {
       }}
       onDrop={handleDrop}
     >
-      <BtnContainer active={hovering}>
-        <button onClick={removeFromSlot}>Remove</button>
-      </BtnContainer>
+      {hovering && (
+        <BtnContainer active={hovering}>
+          <button onClick={() => removeFromSlot(pokemonIndex)}>Remove</button>
+        </BtnContainer>
+      )}
       <Pokeball width={80} height={80} />
       {pokemonIndex && <img src={getPokemon()} alt="choosen-pokemon" />}
     </div>
@@ -75,12 +78,36 @@ const PokemonSlots = () => {
 
   return (
     <div className="poke-slots-container">
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
-      <PokemonSlot addPokemon={addPokemon} removePokemon={removePokemon} />
+      <PokemonSlot
+        key="slot-1"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
+      <PokemonSlot
+        key="slot-2"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
+      <PokemonSlot
+        key="slot-3"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
+      <PokemonSlot
+        key="slot-4"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
+      <PokemonSlot
+        key="slot-5"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
+      <PokemonSlot
+        key="slot-6"
+        addPokemon={addPokemon}
+        removePokemon={removePokemon}
+      />
     </div>
   );
 };
