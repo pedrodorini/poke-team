@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors } from 'constants/colors';
 
 export const BtnContainer = styled.div`
-  display: ${({ active }) => (active ? 'block' : 'none')};
+  display: ${({ active }: { active: boolean }) => (active ? 'block' : 'none')};
   position: absolute;
   background-color: rgba(255, 255, 255, 0.4);
   z-index: 3;

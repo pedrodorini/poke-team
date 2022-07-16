@@ -64,7 +64,7 @@ export const LandingContainer = styled.div`
 export const CardWrapper = styled.div`
   width: 100%;
   position: relative;
-  height: ${({ height }) => height}px;
+  height: ${({ height }: { height: number }) => height}px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;

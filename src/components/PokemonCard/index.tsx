@@ -41,13 +41,16 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         width={width}
         startX={startX}
         startY={startY}
+        types={details?.types}
         draggable
         onDragStart={(e: React.DragEvent) => {
           e.dataTransfer.setData('text/plain', String(index + 1));
         }}
         onClick={() => setModal(true)}
       >
-        <img src={getCardImage()} alt={name} />
+        <div className="card-content">
+          <img src={getCardImage()} alt={name} />
+        </div>
         <p>{name}</p>
       </Card>
       <Modal onClose={() => setModal(false)} visible={modal}>
