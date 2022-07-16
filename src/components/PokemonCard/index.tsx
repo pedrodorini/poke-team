@@ -17,6 +17,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 }) => {
   const [details, setDetails] = useState<PokemonDetails | null>(null);
   const [modal, setModal] = useState(false);
+  const [hovering, setHovering] = useState(false);
 
   const loadPokemonInfo = useCallback(async () => {
     const response = await getPokemonByName(name);
@@ -47,6 +48,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           e.dataTransfer.setData('text/plain', String(index + 1));
         }}
         onClick={() => setModal(true)}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        hovering={hovering}
       >
         <div className="card-content">
           <img src={getCardImage()} alt={name} />

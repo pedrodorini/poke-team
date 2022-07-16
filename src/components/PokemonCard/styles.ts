@@ -12,6 +12,7 @@ interface CardProps {
   startY: number;
   width?: number;
   types?: Type[];
+  hovering?: boolean;
 }
 
 const getColor = (color: string) => {
@@ -64,11 +65,19 @@ const getTypeColor = (types: Type[] = []) => {
   }
 };
 
-export const Card = styled.div.attrs<CardProps>(({ startX, startY }) => ({
-  style: {
-    transform: `translate(${startX}px, ${startY}px)`,
-  },
-}))`
+export const Card = styled.div.attrs<CardProps>(
+  ({ startX, startY, hovering }) => ({
+    style: hovering
+      ? {
+          boxShadow: '4px 4px 14px 6px rgba(0, 0, 0, 0.4)',
+          transform: `translate(${startX}px, ${startY}px) scale(1.03)`,
+          zIndex: 1,
+        }
+      : {
+          transform: `translate(${startX}px, ${startY}px)`,
+        },
+  })
+)`
   padding: 20px;
   font-size: 12px;
   font-weight: bold;
@@ -88,6 +97,7 @@ export const Card = styled.div.attrs<CardProps>(({ startX, startY }) => ({
   position: absolute;
   height: 160px;
   white-space: nowrap;
+  transition: ease 0.3s;
 
   .card-content {
     position: relative;
