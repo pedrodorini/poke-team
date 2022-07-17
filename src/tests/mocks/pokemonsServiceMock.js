@@ -1,5 +1,5 @@
-jest.mock('services/pokemon', () => ({
-  getPokemonByName: jest.fn().mockResolvedValue({
+const serviceReturn = {
+  getPokemonByName: {
     abilities: [
       {
         ability: {
@@ -27,7 +27,18 @@ jest.mock('services/pokemon', () => ({
       },
     ],
     height: 7,
-    held_items: [],
+    held_items: [
+      {
+        item: {
+          name: 'test',
+          url: 'test',
+        },
+        version_details: {
+          version: { name: 'test', url: 'test' },
+          rarity: 0,
+        },
+      },
+    ],
     id: 1,
     is_default: true,
     location_area_encounters: 'https://pokeapi.co/api/v2/pokemon/1/encounters',
@@ -76,17 +87,8 @@ jest.mock('services/pokemon', () => ({
         dream_world: {
           front_default:
             'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
-          front_female: null,
         },
-        home: {
-          front_default:
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png',
-          front_female: null,
-          front_shiny:
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/1.png',
-          front_shiny_female: null,
-        },
-        'official-artwork': {
+        official_artwork: {
           front_default:
             'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
         },
@@ -330,5 +332,17 @@ jest.mock('services/pokemon', () => ({
       },
     ],
     weight: 69,
-  }),
-}));
+  },
+  getPokemons: [
+    {
+      name: 'bulbasaur',
+      url: 'https://pokeapi.co/api/v2/pokemon/1/',
+    },
+    {
+      name: 'ivysaur',
+      url: 'https://pokeapi.co/api/v2/pokemon/2w/',
+    },
+  ],
+};
+
+export default serviceReturn;

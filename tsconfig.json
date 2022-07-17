@@ -7,6 +7,7 @@
       "constants/*": ["constants/*"],
       "utilities/*": ["utilities/*"],
       "components/*": ["components/*"],
+      "tests/*": ["tests/*"],
       "icons/*": ["icons/*"]
     },
     "target": "es5",

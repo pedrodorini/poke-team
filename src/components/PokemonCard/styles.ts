@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 import { Colors } from 'constants/colors';
 import { PokeTypes } from 'constants/pokemonTypes';
-
 import { Type } from 'types/pokemon';
-
 import { capitalize } from 'utilities/string';
 
 interface CardProps {

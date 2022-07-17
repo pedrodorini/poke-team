@@ -16,10 +16,83 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["react-hooks", "@typescript-eslint"],
+    "plugins": [
+        "react-hooks",
+        "@typescript-eslint",
+        "import"
+    ],
     "rules": {
-        "prettier/prettier": ["warn", { "endOfLine": "auto" }],
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "error"
+        "react-hooks/exhaustive-deps": "error",
+        "import/order": [
+            "warn",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "object",
+                    [
+                        "sibling",
+                        "parent"
+                    ],
+                    "index"
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "builtin",
+                        "position": "before"
+                    },
+                    {
+                        "pattern": "services/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "types/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "icons/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "utilities/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "constants/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "components/**",
+                        "group": "internal"
+                    },
+                    {
+                        "pattern": "tests/**",
+                        "group": "internal"
+                    }
+                ],
+                "newlines-between": "always",
+                "pathGroupsExcludedImportTypes": [
+                    "react"
+                ],
+                "alphabetize": {
+                    "order": "asc"
+                }
+            }
+        ],
+        "import/no-duplicates": [
+            "error",
+            {
+                "considerQueryString": true
+            }
+        ]
     }
 }

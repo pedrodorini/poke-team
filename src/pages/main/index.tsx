@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import PokemonCard from 'components/PokemonCard';
 import PokemonSlots from 'components/PokemonSlots';
-
-import { Fit, Pokemon } from 'types/pokemon';
-
-import { getPokemons } from 'services/pokemon';
-
 import Logo from 'icons/logo';
-
+import { getPokemons } from 'services/pokemon';
+import { Fit, Pokemon } from 'types/pokemon';
 import { toMatrix } from 'utilities/array';
 
 import { CardWrapper, LandingContainer } from './styles';
@@ -43,6 +40,7 @@ const getHowManyCardsFit = (tableWidth = 0) => {
 
 function PokemonLanding() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState(false);
   const [guide, setGuide] = useState<number[][]>([]);
   const tableRef = useRef<HTMLDivElement>(null);
   const [fit, setFit] = useState<Fit>({ columnCount: 0, elementSize: 0 });
@@ -53,6 +51,7 @@ function PokemonLanding() {
   );
 
   const loadPokemons = useCallback(async () => {
+    setLoading(true);
     const results = await getPokemons();
     const currentFit = getFit();
     setFit(currentFit);
@@ -60,6 +59,7 @@ function PokemonLanding() {
       toMatrix(Array.from(Array(results.length).keys()), currentFit.columnCount)
     );
     setPokemons(results);
+    setLoading(false);
   }, [getFit]);
 
   useEffect(() => {
@@ -99,6 +99,7 @@ function PokemonLanding() {
     <LandingContainer>
       <div className="logo-container">
         <Logo />
+        {loading && <p data-testid="loader">Loading...</p>}
       </div>
       <div className="table" ref={tableRef}>
         <CardWrapper height={rowVirtualizer.getTotalSize()}>

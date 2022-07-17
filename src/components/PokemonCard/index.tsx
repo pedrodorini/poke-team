@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { getPokemonByName } from 'services/pokemon';
-
-import { PokemonDetails, PokemonCardProps } from 'types/pokemon';
-
 import Modal from 'components/Modal';
+import { getPokemonByName } from 'services/pokemon';
+import { PokemonDetails, PokemonCardProps } from 'types/pokemon';
 
 import { Card } from './styles';
 
@@ -51,6 +49,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
         hovering={hovering}
+        data-testid="poke-card"
       >
         <div className="card-content">
           <img src={getCardImage()} alt={name} />

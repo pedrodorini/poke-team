@@ -1,10 +1,9 @@
-import Axios from 'utilities/request';
-
 import {
   PokemonDetails,
   GetPokemonsResponseData,
   Pokemon,
 } from 'types/pokemon';
+import Axios from 'utilities/request';
 
 export async function getPokemons() {
   let results: Pokemon[] = [];

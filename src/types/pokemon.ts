@@ -66,12 +66,12 @@ export interface PastTypes {
 export interface Sprite {
   front_default: string;
   front_shiny: string;
-  front_female: string;
-  front_shiny_female: string;
+  front_female: string | null;
+  front_shiny_female: string | null;
   back_default: string;
   back_shiny: string;
-  back_female: string;
-  back_shiny_female: string;
+  back_female: string | null;
+  back_shiny_female: string | null;
   other?: {
     dream_world?: {
       front_default?: string;
@@ -89,8 +89,16 @@ export interface Stat {
 }
 
 export interface Type {
-  generation: number;
+  slot: number;
   type: NamedResource;
+}
+
+export interface HeldItems {
+  item: NamedResource;
+  version_details: {
+    version: NamedResource;
+    rarity: number;
+  };
 }
 
 export interface PokemonDetails {
@@ -99,7 +107,7 @@ export interface PokemonDetails {
   forms: NamedResource[];
   game_indices: GameIndice[];
   height: number;
-  held_items: [];
+  held_items: HeldItems[];
   id: number;
   is_default: boolean;
   location_area_encounters: string;

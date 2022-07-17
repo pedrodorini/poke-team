@@ -1,12 +1,18 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-
 import MainPage from 'pages/main';
 
-import { drag } from 'utilities/test';
-
-import '../mocks/pokemonsServiceMock';
+import * as PokeService from 'services/pokemon';
+import ServiceMock from 'tests/mocks/pokemonsServiceMock';
+import { waitToFinish } from 'utilities/tests';
 
 const renderComponent = () => render(<MainPage />);
+
+jest
+  .spyOn(PokeService, 'getPokemons')
+  .mockResolvedValue(ServiceMock.getPokemons);
+jest
+  .spyOn(PokeService, 'getPokemonByName')
+  .mockResolvedValue(ServiceMock.getPokemonByName);
 
 global.innerWidth = 1920;
 describe('Main page tests', () => {
@@ -25,15 +31,14 @@ describe('Main page tests', () => {
 
     expect(await screen.findByText(/bulbasaur/i)).toBeInTheDocument();
     expect(screen.getAllByTestId('poke-slot')).toHaveLength(6);
+
+    await waitToFinish();
   });
 
   test('drag to pokeSlot', async () => {
     renderComponent();
 
     const [firstSlot, secondSlot] = screen.getAllByTestId('poke-slot');
-    drag(await screen.findByText(/bulbasaur/i), {
-      to: firstSlot,
-    });
     fireEvent.drop(firstSlot, { dataTransfer: { getData: () => '1' } });
 
     fireEvent.mouseEnter(firstSlot);
@@ -44,5 +49,7 @@ describe('Main page tests', () => {
     expect(
       screen.queryByRole('button', { name: 'Remove' })
     ).toBeInTheDocument();
+
+    await waitToFinish();
   });
 });
