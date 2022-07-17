@@ -2,7 +2,6 @@ import React from 'react';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { PokeTypes } from 'constants/pokemonTypes';
 import * as PokeService from 'services/pokemon';
 import ServiceMock from 'tests/mocks/pokemonsServiceMock';
 import { waitToFinish } from 'utilities/tests';
